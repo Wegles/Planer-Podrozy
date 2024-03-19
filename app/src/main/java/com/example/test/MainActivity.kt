@@ -11,10 +11,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.test.ui.theme.TestTheme
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.ui.unit.dp
 
 
 class MainActivity : ComponentActivity() {
@@ -66,6 +72,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
+                    ButtonBar(onOk = { /*TODO*/ }, onCancel = { /*TODO*/ })
                 }
             }
         }
@@ -76,7 +83,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "Hello $name! ",
         modifier = modifier
     )
 }
@@ -86,5 +93,23 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     TestTheme {
         Greeting("Android")
+    }
+}
+
+@Composable
+fun ButtonBar(
+    onOk: () -> Unit,
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier.padding(vertical = 100.dp),
+    buttonModifier: Modifier = Modifier
+) {
+    Row(modifier) {
+        Button(onCancel, buttonModifier) {
+            Text("Cancel")
+        }
+        Button(onOk, buttonModifier) {
+            Text("Ok")
+        }
+
     }
 }
